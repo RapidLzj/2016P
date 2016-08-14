@@ -1,0 +1,124 @@
+html, body, div, ol, ul, li, form, tr, td, table, th
+{
+	border: none;
+	margin: 0 auto;
+}
+a:active, a:hover
+{
+	color: red;
+}
+a
+{
+    text-decoration: none;
+    color: navy;
+}
+body {
+	font: 14px Arial, Helvetica, sans-serif;
+	text-align: center;
+}
+p {
+    font-size: 14px;
+}
+#page /*全页面框*/
+{
+	width: 980px;
+	text-align:center;
+}
+#head /*标题框*/
+{
+	width: 980px;
+	height: 22px;
+	font-family: Arial;
+	font-size: 26px;
+	text-align: left;
+}
+#head p
+{
+	font-family: Arial;
+	font-size: 20px;
+	text-align: left;
+}
+#menu /*横向主菜单框*/
+{
+	width: 970px;
+	padding-right: 10px;
+	text-align: right;
+}
+#menu a
+{
+	font-size: 14px;
+}
+#main /*主体内容框*/
+{
+	width: 970px;
+	margin: 10px 5px;
+	text-align: left;
+	border-width: 1px;
+	border-color: #CCCCFF;
+	border-style: solid none;
+}
+#foot /*版权框*/
+{
+	width: 950px;
+	padding-right: 30px;
+	height: 30px;
+	vertical-align: bottom;
+	text-align: right;
+	font-size: 14px;
+}
+#foot p, #foot a
+{
+	font-size: 14px;
+}
+
+.title {
+    font-size: 18px;
+}
+.error {
+    font-size: 14px;
+    color: red;
+    font-style: italic;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.checked {
+    font-weight: bold;
+    color: black;
+}
+.uncheck {
+    font-style: italic;
+    color: gray;
+}
+
+/* Markdown parsed html format */
+.md {
+    width: 980px;
+    padding: 2px;
+    text-align: left;
+}
+
+.md h1 {
+    font-size: 20px;
+}
+.md h2 {
+    font-size: 18px;
+}
+.md h3 {
+    font-size: 16px;
+}
+.md h4 {
+    font-size: 15px;
+}
+.md h5 {
+    font-size: 14px;
+}
+.md p {
+    font-size: 14px;
+}
+.md code {
+    font-family: Menlo;
+    background: gray;
+}
