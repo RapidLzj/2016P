@@ -79,6 +79,11 @@ p {
     color: red;
     font-style: italic;
 }
+.note {
+	font-size: 14px;
+	color: gray;
+	font-style: italic;
+}
 
 table {
     border-collapse: collapse;

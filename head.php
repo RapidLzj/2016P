@@ -11,14 +11,11 @@
 </div>
 <?php if (isset($aLevel)) : ?>
 <div id='menu'>
+    <span><?="$aName/$aInfo"?></span>&emsp;
     <a href='main.php'>&check; Home</a> |
-    <?php if ($aLevel & 32768 != 0) : ?>
-        <a href='runedit.php'>+ New Run</a> |
-    <?php endif; ?>
-    <a href='selfedit.php'>&dagger; My Profile</a> |
-    <?php if ($aLevel & 32768 != 0) : ?>
-        <a href='userlist.php'>&Dagger; Persons</a> |
-    <?php endif; ?>
+    <?php if ($aLevel & $levelRun != 0) : ?><a href='runedit.php'>&sect; New Run</a> | <?php endif; ?>
+    <a href='selfedit.php'>&clubs; My Profile</a> |
+    <?php if ($aLevel & $levelSys != 0) : ?><a href='userlist.php'>&malt; Persons</a> | <?php endif; ?>
     <a href='exit.php'>&cross; Logout</a>
 </div>
 <?php endif; ?>

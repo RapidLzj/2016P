@@ -1,6 +1,7 @@
 <?php
 $pagetitle = 'Login';
 require 'conn.php';
+require 'const.php';
 
 if (isset($_POST["myname"]) && !empty($_POST["myname"])) {
     $myname = $_POST["myname"];
@@ -20,7 +21,7 @@ if (isset($_POST["myname"]) && !empty($_POST["myname"])) {
         $msg = "<span class='error'>Login failed: username or password error</span>";
     }
 } else {
-    $msg = 'Please enter username and password to login';
+    $msg = "<span class='note'>Please enter username and password to login</span>";
 }
 ?>
 
@@ -35,10 +36,14 @@ if (isset($_POST["myname"]) && !empty($_POST["myname"])) {
 <p>
     Username: <input type='text' name='myname' value='<?= $myname ?>' />
     Password: <input type='password' name='mypin' value='' />
-</p>
-<p><button type='submit'>Login</button></p>
-<p><?= $msg ?></p>
+    <button type='submit'>Login</button>
+    <?= $msg ?></p>
 </form>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 <?php require 'foot.php'; ?>
 <?php require 'conx.php'; ?>
