@@ -17,7 +17,7 @@ body {
 	text-align: center;
 }
 p {
-    font-size: 14px;
+    /*font-size: 14px;*/
 }
 #page /*全页面框*/
 {
@@ -72,21 +72,38 @@ p {
 }
 
 .title {
-    font-size: 18px;
+    font-size: 20px;
+	text-align: left;
+	text-indent: 80px;
+	font-family: Tahoma;
 }
 .error {
-    font-size: 14px;
     color: red;
     font-style: italic;
 }
 .note {
-	font-size: 14px;
 	color: gray;
 	font-style: italic;
+}
+.great {
+	font-weight: bold;
 }
 
 table {
     border-collapse: collapse;
+}
+
+tr.rowalt0 {
+	background: #f0f0ff;
+}
+tr.rowalt1 {
+	background: #f0fff0;
+}
+
+td, th {
+	padding: 3px 6px;
+	font-family: Monaco;
+	font-size: 12px;
 }
 
 .checked {
@@ -115,15 +132,164 @@ table {
     font-size: 16px;
 }
 .md h4 {
-    font-size: 15px;
+    font-size: 14px;
 }
 .md h5 {
-    font-size: 14px;
+    font-size: 12px;
 }
 .md p {
-    font-size: 14px;
+    font-size: 12px;
 }
 .md code {
     font-family: Menlo;
     background: gray;
+}
+
+#tbrun td , #tbrun th ,
+#tbnight td , #tbnight th ,
+#tblog th , #tblog td ,
+#tbuser th , #tbuser td  {
+	border-color: gray ;
+	border-style: solid none;
+	border-width: 1px;
+    font-size: 12px;
+}
+
+.sn {
+	font-family: Georgia;
+	font-size: 10px;
+	width: 15px;
+	text-align: right;
+	border: none;
+	color: olive;
+}
+
+#tbrun .id {
+	width: 90px;
+	text-align: center;
+}
+#tbrun .tel {
+	width: 30px;
+	text-align: center;
+}
+#tbrun .date {
+	width: 150px;
+	text-align: center;
+}
+#tbrun .num {
+	width: 20px;
+	text-align: right;
+}
+#tbrun .status {
+	width: 100px;
+}
+#tbrun .note {
+	width: 350px;
+}
+#tbnight .date {
+	width: 120px;
+	text-align: center;
+}
+#tbnight .status {
+	width: 60px;
+	text-align: center;
+}
+#tbnight .num {
+	width: 40px;
+	text-align: center;
+}
+#tbnight .write {
+	width: 50px;
+	text-align: center;
+}
+
+#tbrund  {
+	width: 800px;
+}
+
+.nightinfo .field {
+	width: 150px;
+	font-weight: bold;
+	vertical-align: top;
+	text-align: right;
+}
+.nightinfo .value {
+	width: 710px;
+	vertical-align: top;
+	text-align: left;
+}
+
+.nightinfo td {
+	vertical-align: top;
+}
+
+.longtext, .shorttext, .tinytext,
+#tblog .time, #tblog .fileno, #tblog .lnote, #tblog .event {
+	background: #fff7f7;
+	border-style: none none solid none;
+	border-width: 1px;
+	border-color: darkblue;
+    font-size: 12px;
+}
+
+.longtext {
+	width: 700px;
+}
+.shorttext {
+	width: 150px;
+}
+.tinytext {
+    width: 75px;
+}
+.longbox {
+    font-size: 12px;
+	width: 700px;
+	height: 50px;
+	background: #fff7f7;
+	border-style: dashed none solid none;
+	border-width: 1px;
+	border-color: silver gray darkblue gray;
+}
+
+#tblog .ctime {
+	width: 100px;
+	text-align: center;
+}
+#tblog .cfileno {
+	width: 80px;
+	text-align: center;
+}
+#tblog .cevent {
+	width: 260px;
+}
+#tblog .clnote {
+	width: 160px;
+}
+
+#tblog .time {
+	width: 45px;
+	text-align: right;
+}
+#tblog .fileno {
+	width: 33px;
+	text-align: right;
+}
+#tblog .event {
+	width: 250px;
+}
+#tblog .lnote {
+	width: 150px;
+}
+
+#tbuser .login {
+    width: 75px;
+}
+#tbuser .level {
+    width: 50px;
+}
+#tbuser .name {
+    width: 150px;
+}
+#tbuser .info {
+    width: 150px;
 }

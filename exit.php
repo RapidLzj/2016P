@@ -1,7 +1,10 @@
 <?php
-    $cookieexpire = time()-3600;
-    setcookie('BonRapid',  '', $cookieexpire);
+$cookieexpire = time()-3600;
+setcookie('aLogin',  '', $cookieexpire);
+setcookie('aLevel',  '', $cookieexpire);
+setcookie('aName',  '', $cookieexpire);
+setcookie('aInfo',  '', $cookieexpire);
 
-    header("location: ./");
-    exit();
+header("location: ./");
+exit();
 ?>

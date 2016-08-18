@@ -3,9 +3,9 @@ $pagetitle = 'Login';
 require 'conn.php';
 require 'const.php';
 
-if (isset($_POST["myname"]) && !empty($_POST["myname"])) {
-    $myname = $_POST["myname"];
-    $mypin = $_POST["mypin"];
+$myname = $_POST["myname"];
+$mypin = $_POST["mypin"];
+if (isset($myname) && !empty($myname)) {
     $sql = "select * from Person where PLogin = '$myname' and PPswd = '$mypin'";
     $rs = $conn->query($sql);
     if ($row = $rs->fetch_array()){

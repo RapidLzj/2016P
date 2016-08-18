@@ -1,6 +1,36 @@
 <?php
 date_default_timezone_set('UTC'); //America/Phoenix
 define("TIMEZERO", 1346630400);
+define("MJD0", mktime(0, 0, 0, 10, 10, 1995)); //Timestamp for MJD 2450000
+define("Y2K", 1544); // MJD of 2000-01-01
+
+function datetomjd($ds, $tz) {
+    if (strlen($ds) != 8)
+        return -1;
+
+    $yy = intval(substr($ds, 0, 4));
+    $mm = intval(substr($ds, 4, 2));
+    $dd = intval(substr($ds, 6, 2));
+
+    $md = array(0, 31,28,31,  30,31,30, 31,31,30, 31,30,31);
+
+    //check format
+    if ($yy < 2000 || $mm < 1 || $mm > 12 || $dd < 1 || $dd > $md[$mm])
+        return -1;
+
+    $yd = $dd - 1; // day of year, Jan 01 as 0
+    for ($m = 0; $m < $mm; $m++) $yd += $md[$m];
+    if ($yy % 4 == 0 && $mm > 2) $yd++;
+    $pd = 365 * ($yy - 2000) + ceil(($yy - 2000) / 4) + $yd;
+    if ($tz <= -7) $pd++; // adjust for timezone
+    return $pd + 1544; //J1544 is 2000-01-01
+}
+
+function mjdtodate($mjd, $tz) {
+    $t = MJD0 + $mjd * 24 * 3600 + $tz * 3600;
+    $ds = date("Ymd", $t);
+    return $ds;
+}
 
 function today_date () {
     return datetosn(time() - 7*60*60);
@@ -29,7 +59,7 @@ function spanstr( $t ) {
 function monthspan( $month ) {
     $yr = intval(substr($month, 0, 4));
     $mn = intval(substr($month, 4, 2));
-    if ($on != 2 || $yr % 4 != 0) {
+    if ($month != 2 || $yr % 4 != 0) {
         $daycnt = array(31,28,31, 30,31,30, 31,31,30, 31,30,31);
         $daycnt = $daycnt[$mn-1];
     } else {
