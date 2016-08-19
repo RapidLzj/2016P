@@ -34,6 +34,7 @@ $weatherl = intval($weatherg / 100);
 $weatherw = intval($weatherg / 10) % 10;
 $weatherh = $weatherg % 10;
 $weatherd = $rownight["WeatherDesc"];
+$cansubmit = $status > 1 && $operator != "";
 
 $plan = $parse->text($rownight["Plan"]);
 $result = $parse->text($rownight["Result"]);
@@ -87,7 +88,9 @@ echo "<tr>" .
     "</tr>\n";
 echo "<tr>" .
     "<td class='field'>Operator</td>" .
-    "<td class='value'>$operator</td>" .
+    "<td class='value'>$operator" .
+    ($operator == "" ? "<span class='error'>Who is the operator tonight?</span>" : "") .
+    "</td>" .
     "</tr>\n";
 echo "<tr>" .
     "<td class='field'>Status</td>" .
@@ -96,6 +99,9 @@ for ($s = 1; $s < $nStatus; $s++) {
     $c = ($status & $StatusArr[$s]) != 0;
     echo ($c ? "&check;" : "&cross;") .
         " <span class='".($c ? "checked" : "uncheck")."'>$StatusText[$s]</span> &nbsp; ";
+}
+if ($status == 1) {
+    echo "<br /><span class='error'>Please choose proper status.</span>";
 }
 echo "</td>" .
     "</tr>\n";
@@ -175,7 +181,7 @@ if ($preview) {
         "<td class='field'></td>" .
         "<td class='value' style='text-align: right;'>" .
         "<a href='nightedit.php?id=$nid'>Back to Editor</a> &emsp; " .
-        "<a href='nightsubmit.php?id=$nid'>&#x1f310;Submit</a>" .
+        ($cansubmit ? "<a href='nightsubmit.php?id=$nid'>&#x1f310;Submit</a>" : "") .
         "</td>" .
         "</tr>";
 }

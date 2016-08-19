@@ -152,9 +152,6 @@
 ##### priv.php
 权限检查，被包含文件。根据cookie读出权限信息，并且保存在变量中。
 
-##### selfedit.php & selfsave.php
-个人信息编辑，密码修改等。
-
 ##### userlist.php
 用户列表和编辑。
 
