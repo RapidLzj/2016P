@@ -3,7 +3,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title><?=$pagetitle?> - SSSO Log</title>
 <link rel="stylesheet" type="text/css" media="screen" href="obslog.css" />
-<link rel="stylesheet" type="text/css" media="print" href="obslogprt.css" />
+<link rel="stylesheet" type="text/css" media="print" href="obslogprint.css" />
 </head>
 
 <body>
@@ -18,7 +18,8 @@
     <?php if ($levelEditRun) : ?><a href='runedit.php'>&#x1f4c5; New Run</a> | <?php endif; ?>
     <a href='selfedit.php'>&#x1f5dd; My Profile</a> |
     <?php if ($levelEditSys) : ?><a href='userlist.php'>&#x1f465; Persons</a> | <?php endif; ?>
-    <a href='exit.php'>&#x1f6aa; Logout</a>
+    <a href='exit.php'>&#x1f6aa; Logout</a> |
+    <a href='help.php'>Help</a>
 </div>
 <?php endif; ?>
 <div id='main'>

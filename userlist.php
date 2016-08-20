@@ -32,7 +32,7 @@ $rowid = 0;
 if ($usercnt == 0) {
     echo "<p class='note'>No other user in system now.</p>";
 } else {
-    echo "<table id='tbuser'>\n";
+    echo "<table id='tbuser' class='tblist'>\n";
     echo "<tr>\n" .
         "<th rowspan='2' title='Line No'>&numero;</th>\n" .
         "<th rowspan='2' title='Login name'>Login</th>\n" .

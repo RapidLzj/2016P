@@ -10,15 +10,9 @@ $savemode = $_POST["savemode"];
 $operator = str_replace("'", "''", $_POST["operator"]);
 $weatherg = $_POST["weatherl"] * 100 + $_POST["weatherw"] * 10 + $_POST["weatherh"];
 $weatherd = str_replace("'", "''", $_POST["weatherd"]);
-$status = StatusDoing +
-    (isset($_POST["sObsed"]) ? StatusObsed : 0) +
-    (isset($_POST["sNoWork"]) ? StatusNone : 0) +
-    (isset($_POST["sShared"]) ? StatusShared : 0) +
-    (isset($_POST["sWeather"]) ? StatusWeather : 0) +
-    (isset($_POST["sDevice"]) ? StatusDevice : 0) +
-    (isset($_POST["sOther"]) ? StatusOther : 0) +
-    (isset($_POST["sElse"]) ? StatusElse : 0) +
-    (isset($_POST["sPlan"]) ? StatusPlan : 0);
+$status = StatusDoing;
+for ($s = 0; $s < $nStatus; $s++)
+    $status += (isset($_POST["s$StatusText[$s]"]) ? $StatusArr[$s] : 0);
 $plan = $_POST["plan"];
 $result = $_POST["result"];
 $note = $_POST["note"];

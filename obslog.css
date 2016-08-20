@@ -19,6 +19,25 @@ body {
 p {
     /*font-size: 14px;*/
 }
+h1 {
+    font-size: 20px;
+}
+h2 {
+    font-size: 18px;
+}
+h3 {
+    font-size: 16px;
+}
+h4 {
+    font-size: 14px;
+}
+h5 {
+    font-size: 12px;
+}
+code {
+    font-family: Menlo;
+}
+
 #page /*全页面框*/
 {
 	width: 980px;
@@ -94,10 +113,10 @@ table {
 }
 
 tr.rowalt0 {
-	background: #f0f0ff;
+	background: #f7f7ff;
 }
 tr.rowalt1 {
-	background: #f0fff0;
+	background: #f7fff7;
 }
 
 td, th {
@@ -145,10 +164,11 @@ td, th {
     background: gray;
 }
 
-#tbrun td , #tbrun th ,
-#tbnight td , #tbnight th ,
-#tblog th , #tblog td ,
-#tbuser th , #tbuser td  {
+table.tblist {
+
+}
+
+.tblist td , .tblist th  {
 	border-color: gray ;
 	border-style: solid none;
 	border-width: 1px;
@@ -207,25 +227,25 @@ td, th {
 	width: 800px;
 }
 
-.nightinfo .field {
+.editor .field {
 	width: 150px;
 	font-weight: bold;
 	vertical-align: top;
 	text-align: right;
 }
-.nightinfo .value {
+.editor .value {
 	width: 710px;
 	vertical-align: top;
 	text-align: left;
 }
 
-.nightinfo td {
+.editor td {
 	vertical-align: top;
 }
 
 .longtext, .shorttext, .tinytext,
 #tblog .time, #tblog .fileno, #tblog .lnote, #tblog .event {
-	background: #fff7f7;
+	background: #fffcfc;
 	border-style: none none solid none;
 	border-width: 1px;
 	border-color: darkblue;
@@ -245,7 +265,7 @@ td, th {
     font-size: 12px;
 	width: 700px;
 	height: 50px;
-	background: #fff7f7;
+	background: #fffcfc;
 	border-style: dashed none solid none;
 	border-width: 1px;
 	border-color: silver gray darkblue gray;

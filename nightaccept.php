@@ -11,10 +11,15 @@ if (! isset($nid)) {
     require "conx.php";
 }
 
-$sqlsubmit = "UPDATE ObsNight SET " .
-    "Status = Status & 65534, SubmitTime = CURRENT_TIMESTAMP " .
-    "WHERE NightID = '$nid'";
-$conn->query($sqlsubmit);
+if (! $levelEditRun) {
+    header("location: nightlog.php?id=$nid");
+    require "conx.php";
+}
+
+$sqlaccept = "UPDATE ObsNight SET " .
+    "AcceptTime = CURRENT_TIMESTAMP " .
+    "WHERE NightID = '$nid' AND AcceptTime IS NULL";
+$conn->query($sqlaccept);
 
 header("location: nightlog.php?id=$nid");
 require "conx.php";

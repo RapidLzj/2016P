@@ -84,7 +84,7 @@ echo "<p class='title'>Run $runid</p>";
 
 echo "<form action='runsave.php' method='post'>";
 
-echo "<table class='nightinfo'>\n";
+echo "<table class='editor'>\n";
 
 echo "<tr>" .
     "<th class='field'>RunID</th>" .

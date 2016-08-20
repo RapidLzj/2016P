@@ -22,7 +22,7 @@ echo "<p class='title'>$runcnt Runs</p>";
 if ($runcnt == 0) {
     echo "<p class='note'>No run in system now.</p>";
 } else {
-    echo "<table id='tbrun'>\n" .
+    echo "<table id='tbrun' class='tblist'>\n" .
         "<tr>\n" .
         "<th title='Line No'>&numero;</th>\n" .
         "<th title='ID'>&#x1f3f7;</th>\n" .

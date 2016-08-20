@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - surveylog@uvbys" uuid="9913ef30-0c2d-4d9d-9d7b-5182430fe44b">
+    <database-info product="MySQL" version="5.6.31-0ubuntu0.14.04.2" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+      <schema id="1" name="surveylog">
+        <visible>1</visible>
+      </schema>
+      <schema id="2" name="catalog"/>
+      <schema id="3" name="dr12"/>
+      <schema id="4" name="information_schema"/>
+      <schema id="5" name="survey"/>
+      <schema id="6" name="usnob1"/>
+      <table id="7" parent="1" name="FileBasic"/>
+      <table id="8" parent="1" name="ObsLog"/>
+      <table id="9" parent="1" name="ObsNight"/>
+      <table id="10" parent="1" name="ObsRun"/>
+      <table id="11" parent="1" name="Person"/>
+      <table id="12" parent="1" name="Telescope"/>
+      <table id="13" parent="1" name="nowt_field"/>
+      <routine id="14" parent="1" name="mjd2date">
+        <routine-kind>FUNCTION</routine-kind>
+      </routine>
+      <column id="15" parent="7" name="FileID">
+        <mandatory>1</mandatory>
+        <data-type>char(9)|0</data-type>
+      </column>
+      <column id="16" parent="7" name="MJD">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="17" parent="7" name="Telescope">
+        <data-type>char(1)|0</data-type>
+      </column>
+      <column id="18" parent="7" name="ObsTime">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="19" parent="7" name="SN">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="20" parent="7" name="Type">
+        <data-type>char(1)|0</data-type>
+      </column>
+      <column id="21" parent="7" name="Object">
+        <mandatory>1</mandatory>
+        <data-type>varchar(20)|0</data-type>
+      </column>
+      <column id="22" parent="7" name="Filter">
+        <mandatory>1</mandatory>
+        <data-type>varchar(10)|0</data-type>
+      </column>
+      <column id="23" parent="7" name="FilterCode">
+        <data-type>char(1)|0</data-type>
+      </column>
+      <column id="24" parent="7" name="ExpTime">
+        <mandatory>1</mandatory>
+        <data-type>float|0</data-type>
+      </column>
+      <column id="25" parent="7" name="RADeg">
+        <data-type>double|0</data-type>
+      </column>
+      <column id="26" parent="7" name="DecDeg">
+        <data-type>double|0</data-type>
+      </column>
+      <column id="27" parent="7" name="Tag">
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="28" parent="7" name="FileName">
+        <data-type>varchar(100)|0</data-type>
+      </column>
+      <column id="29" parent="7" name="Note">
+        <data-type>varchar(100)|0</data-type>
+      </column>
+      <index id="30" parent="7" name="IxObsFileBasicFilterExpTime">
+        <columns>Filter
+ExpTime</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="31" parent="7" name="IxObsFileBasicMjdSn">
+        <columns>MJD
+SN</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="32" parent="7" name="IxObsFileBasicObject">
+        <columns>Object</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="33" parent="7" name="PRIMARY">
+        <columns>FileID</columns>
+        <primary>1</primary>
+      </key>
+      <column id="34" parent="8" name="LineID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="35" parent="8" name="NightID">
+        <mandatory>1</mandatory>
+        <data-type>char(5)|0</data-type>
+      </column>
+      <column id="36" parent="8" name="LogTime">
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="37" parent="8" name="FromSN">
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="38" parent="8" name="ToSN">
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="39" parent="8" name="Event">
+        <data-type>tinytext|0</data-type>
+      </column>
+      <column id="40" parent="8" name="Note">
+        <data-type>tinytext|0</data-type>
+      </column>
+      <index id="41" parent="8" name="IxObsLogLineNightTime">
+        <columns>NightID
+LogTime</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="42" parent="8" name="PRIMARY">
+        <columns>LineID</columns>
+        <primary>1</primary>
+      </key>
+      <column id="43" parent="9" name="NightID">
+        <mandatory>1</mandatory>
+        <data-type>char(5)|0</data-type>
+      </column>
+      <column id="44" parent="9" name="MJD">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="45" parent="9" name="RunID">
+        <mandatory>1</mandatory>
+        <data-type>char(8)|0</data-type>
+      </column>
+      <column id="46" parent="9" name="DateStr">
+        <data-type>char(8)|0</data-type>
+      </column>
+      <column id="47" parent="9" name="Operator">
+        <data-type>tinytext|0</data-type>
+      </column>
+      <column id="48" parent="9" name="WeatherGeneral">
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="49" parent="9" name="WeatherDesc">
+        <data-type>tinytext|0</data-type>
+      </column>
+      <column id="50" parent="9" name="Plan">
+        <data-type>tinytext|0</data-type>
+      </column>
+      <column id="51" parent="9" name="Result">
+        <data-type>tinytext|0</data-type>
+      </column>
+      <column id="52" parent="9" name="Note">
+        <data-type>tinytext|0</data-type>
+      </column>
+      <column id="53" parent="9" name="Status">
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="54" parent="9" name="AcceptTime">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <column id="55" parent="9" name="SubmitTime">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <index id="56" parent="9" name="IxObsNightMjd">
+        <columns>MJD</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="57" parent="9" name="PRIMARY">
+        <columns>NightID</columns>
+        <primary>1</primary>
+      </key>
+      <column id="58" parent="10" name="RunID">
+        <mandatory>1</mandatory>
+        <data-type>char(8)|0</data-type>
+      </column>
+      <column id="59" parent="10" name="Telescope">
+        <data-type>char(5)|0</data-type>
+      </column>
+      <column id="60" parent="10" name="FromJD">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="61" parent="10" name="ToJD">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="62" parent="10" name="FromDate">
+        <data-type>char(8)|0</data-type>
+      </column>
+      <column id="63" parent="10" name="ToDate">
+        <data-type>char(8)|0</data-type>
+      </column>
+      <column id="64" parent="10" name="Filters">
+        <data-type>tinytext|0</data-type>
+      </column>
+      <column id="65" parent="10" name="Note">
+        <data-type>tinytext|0</data-type>
+      </column>
+      <key id="66" parent="10" name="PRIMARY">
+        <columns>RunID</columns>
+        <primary>1</primary>
+      </key>
+      <column id="67" parent="11" name="PID">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="68" parent="11" name="PLogin">
+        <mandatory>1</mandatory>
+        <data-type>tinytext|0</data-type>
+      </column>
+      <column id="69" parent="11" name="PPswd">
+        <mandatory>1</mandatory>
+        <data-type>tinytext|0</data-type>
+      </column>
+      <column id="70" parent="11" name="PLevel">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="71" parent="11" name="PName">
+        <mandatory>1</mandatory>
+        <data-type>tinytext|0</data-type>
+      </column>
+      <column id="72" parent="11" name="PInfo">
+        <data-type>tinytext|0</data-type>
+      </column>
+      <key id="73" parent="11" name="PRIMARY">
+        <columns>PID</columns>
+        <primary>1</primary>
+      </key>
+      <column id="74" parent="12" name="Telescope">
+        <mandatory>1</mandatory>
+        <data-type>char(5)|0</data-type>
+      </column>
+      <column id="75" parent="12" name="FullName">
+        <data-type>tinytext|0</data-type>
+      </column>
+      <column id="76" parent="12" name="TimeZone">
+        <data-type>int(2)|0</data-type>
+      </column>
+      <column id="77" parent="12" name="Lon">
+        <data-type>float|0</data-type>
+      </column>
+      <column id="78" parent="12" name="Lat">
+        <data-type>float|0</data-type>
+      </column>
+      <column id="79" parent="12" name="Ele">
+        <data-type>float|0</data-type>
+      </column>
+      <column id="80" parent="12" name="LevelMask">
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="81" parent="12" name="Note">
+        <data-type>tinytext|0</data-type>
+      </column>
+      <key id="82" parent="12" name="PRIMARY">
+        <columns>Telescope</columns>
+        <primary>1</primary>
+      </key>
+      <column id="83" parent="13" name="field_id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="84" parent="13" name="ra_deg">
+        <data-type>double|0</data-type>
+      </column>
+      <column id="85" parent="13" name="dec_deg">
+        <data-type>double|0</data-type>
+      </column>
+      <column id="86" parent="13" name="gl_deg">
+        <data-type>double|0</data-type>
+      </column>
+      <column id="87" parent="13" name="gb_deg">
+        <data-type>double|0</data-type>
+      </column>
+      <column id="88" parent="13" name="note">
+        <data-type>tinytext|0</data-type>
+      </column>
+      <column id="89" parent="13" name="sdss_cnt">
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="90" parent="13" name="sdss_ra_avg">
+        <data-type>double|0</data-type>
+      </column>
+      <column id="91" parent="13" name="sdss_dec_avg">
+        <data-type>double|0</data-type>
+      </column>
+      <column id="92" parent="13" name="tag">
+        <data-type>tinyint(4)|0</data-type>
+      </column>
+      <key id="93" parent="13" name="PRIMARY">
+        <columns>field_id</columns>
+        <primary>1</primary>
+      </key>
+      <argument id="94" parent="14">
+        <direction>RETURN</direction>
+        <data-type>datetime|0</data-type>
+      </argument>
+      <argument id="95" parent="14" name="mjd">
+        <direction>IN</direction>
+        <data-type>int(11)|0</data-type>
+      </argument>
+    </database-model>
+  </data-source>
+</component>

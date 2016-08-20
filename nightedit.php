@@ -12,7 +12,7 @@ if (! isset($nid)) {
 }
 
 $sqlnight = "SELECT RunID, NightID, MJD, DateStr, Status, Operator, " .
-    "WeatherGeneral, WeatherDesc, Plan, Result, Note " .
+    "WeatherGeneral, WeatherDesc, Plan, Result, Note, SubmitTime, AcceptTime " .
     "FROM ObsNight n WHERE NightID = '$nid'";
 $rsnight = $conn->query($sqlnight);
 $rownight = $rsnight->fetch_array();
@@ -34,6 +34,14 @@ $plan = $rownight["Plan"];
 $result = $rownight["Result"];
 $note = $rownight["Note"];
 $status = $rownight["Status"];
+$submittime = $rownight["SubmitTime"];
+$accepttime = $rownight["AcceptTime"];
+
+if (! is_null($accepttime)) {
+    // accepted log cannot be edited again
+    header("location: nightlog.php?id=$nid");
+    require "conx.php";
+}
 
 $sqlrun = "SELECT RunID, Telescope, Filters " .
           "FROM ObsRun r WHERE RunID = '$runid'";
@@ -93,14 +101,15 @@ function chkbox($chkname, $cls, $text, $value, $title) {
 require 'head.php';
 
 echo "<p class='title'>Observation Log of $dates(J$mjd)</p>";
-
+if (! is_null($submittime))
+    echo "<p class='note'>Edit after submit, last submitting time is $submittime .</p>";
 
 echo "<form action='nightsave.php' method='post'>";
 echo "<input type='hidden' name='nightid' value='$nid' />";
 echo "<input type='hidden' name='logcnt' value='$logcnt' />";
 echo "<input type='hidden' name='savemode' value='save' />";
 
-echo "<table class='nightinfo'>\n";
+echo "<table class='editor'>\n";
 echo "<tr id='help'><td class='field'><button type='button' onclick='helpinfo.style.display = \"block\";'>Show Help</button></td>\n";
 echo "<td class='value'><div id='helpinfo' style='display:none;'>\n" .
     "<p>About Observation Log Fields</p>" .
@@ -124,14 +133,18 @@ echo "<td class='value'><div id='helpinfo' style='display:none;'>\n" .
     "Result: What has been done in this night, according to original plan.<br />\n" .
     "</p><p><button type='button' onclick='helpinfo.style.display = \"none\";'>Hide Help</button></p>\n" .
     "</div></td></tr>\n";
+
 echo "<tr>" .
-    "<td class='field'>Run</td><td class='value'><a href='rundetail.php?id=$runid'>$runid</a></td>" .
+    "<td class='field'>Date &amp; Run</td>" .
+    "<td class='value'>$dates(J$mjd) / <a href='rundetail.php?id=$runid'>$runid</a></td>" .
     "</tr>\n";
 echo "<tr>" .
-    "<td class='field'>Telescope</td><td class='value'>$telen</td>" .
+    "<td class='field'>Telescope</td>" .
+    "<td class='value'>$teles ($telen)</td>" .
     "</tr>\n";
 echo "<tr>" .
-    "<td class='field'>Filters</td><td class='value'>$filts</td>" .
+    "<td class='field'>Filters</td>" .
+    "<td class='value'>$filts</td>" .
     "</tr>\n";
 echo "<tr>" .
     "<td class='field'>Operator</td>" .
@@ -140,7 +153,7 @@ echo "<tr>" .
 echo "<tr>" .
     "<td class='field'>Status</td>" .
     "<td class='value'>";
-for ($s = 1; $s < $nStatus; $s++) {
+for ($s = 0; $s < $nStatus; $s++) {
     echo chkbox("s$StatusText[$s]", "", $StatusText[$s], ($status & $StatusArr[$s]) != 0, $StatusTitle[$s]);
 }
 echo "</td>" .

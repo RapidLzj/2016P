@@ -78,7 +78,7 @@ echo "<p class='title'>User $pname</p>";
 
 echo "<form action='usersave.php' method='post'>";
 
-echo "<table class='nightinfo'>\n";
+echo "<table class='editor'>\n";
 
 echo "<tr>" .
     "<th class='field'>Your Password</th>" .

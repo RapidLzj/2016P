@@ -53,11 +53,11 @@ echo "<table id='tbrund'>\n" .
 echo "<p></p>";
 
 $rowid = 0;
-echo "<table id='tbnight'>\n" .
+echo "<table id='tbnight' class='tblist'>\n" .
     "<tr>\n" .
     "<th title='Line No'>&numero;</th>\n" .
     "<th title='Local Date and Julian Day'>Date</th>\n";
-for ($i = 1; $i < $nStatus; $i++) {
+for ($i = 0; $i < $nStatus; $i++) {
     echo "<th title='$StatusTitle[$i]'>$StatusText[$i]</th>";
 }
 echo "<th title='Log Items Count'>Log</th>\n";
@@ -76,7 +76,7 @@ while ($row = $rsnight->fetch_array()) {
     echo "<tr class='rowalt$rowalt'>\n" .
         "<td class='sn'>$rowid</td>\n" .
         "<td class='date'><a href='nightlog.php?id=$nid' title='View log'>$dates/J$mjd</a></td>\n";
-    for ($i = 1; $i < $nStatus; $i++) {
+    for ($i = 0; $i < $nStatus; $i++) {
         if ($status == 0)
             $ss = ".";
         elseif (($status & StatusDoing) != 0)

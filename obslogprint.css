@@ -1,0 +1,137 @@
+@import "obslog.css";
+
+#head /*标题框*/
+{
+	display: none;
+}
+#menu /*横向主菜单框*/
+{
+    display: none;;
+}
+#main /*主体内容框*/
+{
+    border: none;
+}
+#foot /*版权框*/
+{
+	display: none;
+}
+
+.title {
+}
+.error {
+    color: red;
+    font-style: italic;
+}
+.note {
+	color: gray;
+	font-style: italic;
+}
+.great {
+	font-weight: bold;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+tr.rowalt0 {
+	background: none;
+}
+tr.rowalt1 {
+	background: none;
+}
+
+td, th {
+}
+
+.checked {
+}
+.uncheck {
+}
+
+
+.tblist td , .tblist th  {
+}
+
+.sn {
+	color: black;
+}
+
+#tbrun .id {
+}
+#tbrun .tel {
+}
+#tbrun .date {
+}
+#tbrun .num {
+}
+#tbrun .status {
+}
+#tbrun .note {
+}
+#tbnight .date {
+}
+#tbnight .status {
+}
+#tbnight .num {
+}
+#tbnight .write {
+}
+
+#tbrund  {
+}
+
+.editor .field {
+}
+.editor .value {
+}
+
+.editor td {
+}
+
+.longtext, .shorttext, .tinytext,
+#tblog .time, #tblog .fileno, #tblog .lnote, #tblog .event {
+	background: none;
+	border-color: black;
+}
+
+.longtext {
+}
+.shorttext {
+}
+.tinytext {
+}
+.longbox {
+	background: none;
+	border-style: dashed none solid none;
+	border-width: 1px;
+	border-color: silver gray black gray;
+}
+
+#tblog .ctime {
+}
+#tblog .cfileno {
+}
+#tblog .cevent {
+}
+#tblog .clnote {
+}
+
+#tblog .time {
+}
+#tblog .fileno {
+}
+#tblog .event {
+}
+#tblog .lnote {
+}
+
+#tbuser .login {
+}
+#tbuser .level {
+}
+#tbuser .name {
+}
+#tbuser .info {
+}
