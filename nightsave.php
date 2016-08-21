@@ -26,7 +26,7 @@ $event = $_POST["event"];
 $lnote = $_POST["lnote"];
 
 if (! isset($nid)) {
-    header("location: main.php");
+    header("location: ./");
     require "conx.php";
 }
 

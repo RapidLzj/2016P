@@ -1,16 +1,17 @@
 <?php
 if (! isset($_COOKIE["aLevel"])) :
-    header("location: ./");
+    header("location: login.php");
     exit;
 endif;
 
+$aPid   = $_COOKIE["aPid"] + 0;
 $aLogin = $_COOKIE["aLogin"];
-$aLevel = 0 + $_COOKIE["aLevel"];
-$aName = $_COOKIE["aName"];
-$aInfo = $_COOKIE["aInfo"];
+$aLevel = $_COOKIE["aLevel"] + 0;
+$aName  = $_COOKIE["aName"];
+$aInfo  = $_COOKIE["aInfo"];
 
 if (($aLevel & LevelLogin) == 0) :
-    header("location: ./");
+    header("location: login.php");
     exit;
 endif;
 

@@ -7,7 +7,7 @@ require 'util.php';
 
 $nid = $_GET["id"];
 if (! isset($nid)) {
-    header("location: main.php");
+    header("location: ./");
     require "conx.php";
 }
 

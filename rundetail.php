@@ -6,7 +6,7 @@ require 'util.php';
 
 $runid = $_GET["id"];
 if (! isset($runid)) {
-    header("location: main.php");
+    header("location: ./");
     require "conx.php";
 }
 $pagetitle = 'Run $runid Info';
@@ -15,7 +15,7 @@ $sqlrun = "SELECT RunID, Telescope, FromDate, ToDate, Filters, Note, ToJD-FromJD
           "FROM ObsRun r WHERE RunID = '$runid'";
 $rsrun = $conn->query($sqlrun);
 if ($rsrun->num_rows == 0) {
-    header("location: main.php");
+    header("location: ./");
     require "conx.php";
 }
 $rowrun = $rsrun->fetch_array();

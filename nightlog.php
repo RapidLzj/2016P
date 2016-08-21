@@ -11,7 +11,7 @@ $parse = new Parsedown();
 $preview = isset($_GET["p"]);
 $nid = $_GET["id"];
 if (! isset($nid)) {
-    header("location: main.php");
+    header("location: ./");
     require "conx.php";
 }
 
@@ -21,7 +21,7 @@ $sqlnight = "SELECT RunID, NightID, MJD, DateStr, Status, Operator, " .
 $rsnight = $conn->query($sqlnight);
 $rownight = $rsnight->fetch_array();
 if (! $rownight) {
-    header("location: main.php");
+    header("location: ./");
     require "conx.php";
 }
 $runid = $rownight["RunID"];

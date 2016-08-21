@@ -5,14 +5,18 @@ require 'conn.php';
 require 'util.php';
 
 if (! $levelEditSys) {
-    header("location: main.php");
-    require "conx.php";
+    //header("location: ./");
+    //require "conx.php";
+    $pid = $aPid;
+} else {
+    $pid = $_GET["id"];
+    if (!isset($pid)) { // new user
+        $pid = "0";
+    } elseif ($pid == "self") {
+        $pid = $aPid;
+    }
 }
 
-$pid = $_GET["id"];
-if (! isset($pid) || ! is_numeric($pid)) { // new run
-    $runid = "0";
-}
 $err = $_GET["err"];
 if (! isset($err)) $err = 0;
 $errmsg = array(
@@ -91,7 +95,9 @@ echo "<tr>" .
     "<td class='value'>" .
     "<input type='hidden' name='pid' value='$pid' />" .
     "<input type='hidden' name='savemode' value='edit' />" .
-    "<input type='text' class='shorttext' name='plogin' value='$plogin' maxlength='20' />" .
+    ($pid == $aPid ?
+        "<span class='shorttext'>$plogin</span>" :
+        "<input type='text' class='shorttext' name='plogin' value='$plogin' maxlength='20' />") .
     "</td></tr>\n";
 echo "<tr>" .
     "<th class='field'>Full Name</th>" .
@@ -112,18 +118,32 @@ echo "<tr>" .
 echo "<tr>" .
     "<th class='field'>Privileges</th>" .
     "<td class='value'>";
-echo chkbox("plevellogin", "", "Active", $plevellogin, "Can login") . "&emsp;";
-echo chkbox("plevelrun", "", "Run", $plevelrun, "Edit or add run") . "&emsp;";
-echo chkbox("plevelsys", "", "User", $plevelsys, "User control") . "&emsp;";
-echo "Telescopes: ";
-foreach ($tel as $tn => $tl)
-    echo chkbox("pleveltel$tn", "", $tn, $tl, "Operator of $tn") . "&nbsp;";
+if ($pid == $aPid) {
+    echo ($plevellogin ? "&check;" : "&cross;") .
+        "<span class='" . ($plevellogin ? "checked" : "uncheck") . "'>Active</span> &nbsp; ";
+    echo ($plevelrun ? "&check;" : "&cross;") .
+        "<span class='" . ($plevelrun ? "checked" : "uncheck") . "'>Edit Run</span> &nbsp; ";
+    echo ($plevelsys ? "&check;" : "&cross;") .
+        "<span class='" . ($plevelsys ? "checked" : "uncheck") . "'>Edit User</span> &nbsp; ";
+    echo "Telescopes: ";
+    foreach ($tel as $tn => $tl)
+        echo ($tl ? "&check;" : "&cross;") .
+            "<span class='" . ($tl ? "checked" : "uncheck") . "'>$tn</span> &nbsp; ";
+} else {
+    echo chkbox("plevellogin", "", "Active", $plevellogin, "Can login") . "&emsp;";
+    echo chkbox("plevelrun", "", "Run", $plevelrun, "Edit or add run") . "&emsp;";
+    echo chkbox("plevelsys", "", "User", $plevelsys, "User control") . "&emsp;";
+    echo "Telescopes: ";
+    foreach ($tel as $tn => $tl)
+        echo chkbox("pleveltel$tn", "", $tn, $tl, "Operator of $tn") . "&nbsp;";
+}
 echo "</td></tr>\n";
 echo "<tr>" .
     "<th class='field'></th>" .
     "<td class='value'>" .
     "<button type='submit' onclick='savemode.value=\"edit\";'>Save</button> &emsp; " .
-    ($pid != 0 ? "<button type='submit' onclick='savemode.value=\"delete\";'>Delete</button>" : "") .
+    (($pid == 0 || $pid == $aPid) ? "" :
+        "<button type='submit' onclick='savemode.value=\"delete\";'>Delete</button>") .
     "</td></tr>\n";
 if ($err != 0) {
     echo "<tr>" .

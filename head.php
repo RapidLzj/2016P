@@ -14,9 +14,9 @@
 <?php if (isset($aLevel)) : ?>
 <div id='menu'>
     <span><?="$aName/$aInfo"?></span>&emsp;
-    <a href='main.php'>&#x1f310; Home</a> |
+    <a href='./'>&#x1f310; Home</a> |
     <?php if ($levelEditRun) : ?><a href='runedit.php'>&#x1f4c5; New Run</a> | <?php endif; ?>
-    <a href='selfedit.php'>&#x1f5dd; My Profile</a> |
+    <a href='useredit.php?id=self'>&#x1f5dd; My Profile</a> |
     <?php if ($levelEditSys) : ?><a href='userlist.php'>&#x1f465; Persons</a> | <?php endif; ?>
     <a href='exit.php'>&#x1f6aa; Logout</a> |
     <a href='help.php'>Help</a>

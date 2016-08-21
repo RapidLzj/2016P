@@ -5,7 +5,7 @@ require 'conn.php';
 require 'util.php';
 
 if (! $levelEditRun) {
-    header("location: main.php");
+    header("location: ./");
     require "conx.php";
 }
 

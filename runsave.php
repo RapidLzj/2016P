@@ -5,7 +5,7 @@ require 'conn.php';
 require 'util.php';
 
 if (! $levelEditRun) {
-    header("location: main.php");
+    header("location: ./");
     require "conx.php";
 }
 
@@ -116,7 +116,7 @@ if ($err != 0) {
         $conn->query($sqldel);
         $sqldel = "DELETE FROM ObsRun WHERE RunID = '$oldid'";
         $conn->query($sqldel);
-        header("location: main.php");
+        header("location: ./");
     } else {
         $filts = str_replace("'", "''", $filts);
         $rnote = str_replace("'", "''", $rnote);
