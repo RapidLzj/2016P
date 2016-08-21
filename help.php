@@ -1,104 +1,127 @@
 <?php
 $pagetitle = 'Help';
-require 'conn.php';
 require 'const.php';
+require 'priv.php';
+require 'conn.php';
 
 ?>
 
+
 <?php require 'head.php'; ?>
 
-<p class="title">Help for SSSOL</p>
+<p class="title">SAGE巡天日志系统操作说明</p>
 
-<p>This system is used to write and print log for SAGE Sky Survey Observation.</p>
+<p>本系统用于SAGE巡天的日志记录和查看等。</p>
 
-<h3>Basic</h3>
+<h3>部分基本概念</h3>
 
-<h5>Run</h5>
-<p>Some continually planned observation nights are called a run.
-    Usually we name a run by its year, month and telescope initial.
-    For example, a run using Bok on Jan 2016 is called 201601_B.
-    If there are more than 1 run in a month, we put A, B, and etc to replace the underline.
+<h4>观测期</h4>
+<p>连续的多个观测夜为一个观测期，一般用年、月、望远镜首字母命名。
+    如在Bok望远镜2016年1月进行的观测，命名为201601_B。
+    如果一个月内有多次观测，则在下划线位置用ABC等字母区分，
+    如201603AB、201603BB，分别代表2016年3月在Bok上的第一次和第二次观测。
+    观测期名字最长8个字符。
 </p>
 
-<p>Another naming method is to use 24 half month code, as we do for asteroids.</p>
+<p>对于从上月底延续到下月初的观测，原则上按照开始时间所在月进行命名。</p>
 
-<p>If a run starts at the end of last month, and extends into next month,
-    we will name it by its start date.</p>
+<h4>观测夜</h4>
 
-<h5>Observing Night</h5>
-<p>We have two ways to name an observing night, one is the local date of start,
-    the other is use Julian day number.</p>
+<p>观测夜有两种命名方式，年月日方式，和简化儒略日方式。
+    使用年月日方式时，以观测前半夜望远镜所在地当地日期为准。
+    使用儒略日方式时，取当地时间18:00对应的简化儒略日整数部分最后四位，并在前面加上J前缀。
+    不论当晚的实际观测是什么时候开始，这个晚上的编号都以上述方式为准。
+    对于Bok望远镜(UTC-7以及以西)，使用儒略日表示时，对应的日期是本地日期的后一天。
+    观测夜命名由程序自动进行。</p>
 
-<p>When use human readable data format, we use local date, but not UTC date.
-    We use the day when the night start, whatever real starting hour is.
-    We use <code>yyyymmdd</code> format, 2 digits for month and day.</p>
+<h3>观测日志</h3>
 
-<p>When use Julian day, we use <code>Jxxxx</code> format, xxxx means the last 4 digits of MJD.
-    We use MJD of local 18:00 at starting day, when ever the real observation starts.
-    And when we talk about local time, we use local official time,
-    what ever timezone the telescope really locates,
-    and discard daylight saving shift.</p>
+<h4>开始撰写</h4>
 
-<p>Date format and JD format are all provided by program.</p>
+<p>在观测期信息中，点击右侧的 &#x1f4dd; 进入日志编写模式。</p>
 
-<h3>Log</h3>
+<p>日志编写时,会自动提供若干空行供填写。当空行不够时，保存即可获得新的空行。</p>
 
-<h5>Start log</h5>
-<p>Click on &#x1f4dd; tag at right of date line to write log.</p>
+<h4>天气描述</h4>
 
-<h5>Weather</h5>
-<p>For general weather condition, choose one which describe the worst situation of the night.
-    Items with a leading &cross; mean operators must shutdown and pause observation.</p>
+<p>日志中天气描述分为全局情况，和具体描述。
+    全局情况根据雷电、风力、湿度和降水等,分为三个下拉框进行选择。
+    原则上根据当晚最坏情况选择相应项目。
+    选项中的程度，根据个人评价选择，没有十分严格的界限。
+    但是前面带有 &cross; 的项目，表示已经严重到需要关机、停止观测的情形。</p>
 
-<p>Weather description will record detailed weather parameters.</p>
+<p>气象具体描述，则是对下拉选项的补充和完善，除了下拉框没有考虑到的情况，还要具体列出当晚的气象指标。</p>
 
-<h5>Status</h5>
-<p>Status means a conclusion of this night.
-    If the whole night is used without problem, check <code>obsed</code>.
-    If the night is shared with other proposal, we still take the night as a whole night.
-    But when bad weather or device problem makes time lost, do not check <code>obsed</code>,
-    instead of checking <code>weather</code> or <code>device</code>.</p>
+<h4>状态</h4>
 
-<p>Device problem means we have to pause working and fix it. If device is only unstable
-    and make some bad images, we need only log bad numbers, the night is still whole.</p>
+<p>状态行由一系列选择框来描述当晚的状态。</p>
+<ul>
+    <li>AllOK 表示当天晚上的观测完全进行，未被任何意外中断。
+        对于和其他项目共享使用的晚上，只要本项目分配的时间顺利使用，就视为一切正常。</li>
+    <li>NoWork 表示当天晚上由于某些原因，完全没有进行工作。本状态和AllOK不可能同时出现。</li>
+    <li>Shared 表示当天晚上按照原计划有其他项目共享晚上。这里的其他项目，
+        特指事先明确安排了开始和结束时间的，而非GRB观测等时间性比较突然的观测。</li>
+    <li>Weather 当本晚的观测由于天气原因必须中断(包括推迟开始、提前结束)，必须勾选。</li>
+    <li>Device 同上，但是原因是设备问题。特指设备必须停机进行检修、检查等等的情况，
+        偶尔不稳定，例如跟踪问题等，不需要在此记录,直接写在日志中即可。</li>
+    <li>Other 当晚有突发其他观测需要临时插入，导致占用本项目观测时间的。例如GRB等。
+        此类临时观测，特指事先没有预料并且没有在观测计划中分配具体时间的。</li>
+    <li>Else 当天晚上有其他原因造成观测中断的，不属于以上几种情况之一。</li>
+    <li>Cancel 在观测开始之前，由于观测方案调整、时间分配修改等等原因，取消当晚观测，
+        或者改期到其他时间(如交换等)，均在本项目表示。</li>
+    <li>当AllOK选中时，除了Shared之外，其他情况必须是非选中的。</li>
+    <li>当NoWork选中时，后面的具体内容必须相应选中以说明原因。</li>
+    <li>对于当天晚上只有部分观测的(既没有完全观测，也没有彻底不观测)，那么必须选中相应的原因。
+        同时，对于部分观测的情况，AllOK和NoWork都不选中。</li>
+    <li>以上各个项目，在提交之前必须根据情况选择，不可能都不选。</li>
+</ul>
 
-<p><code>Other</code> means inserted by other observations, for example GRB.
-    And <code>else</code> stands for any reason not listed above.</p>
+<h4>日志细节</h4>
 
-<p>Once the night is canceled or rescheduled, check <code>cancel</code> and <code>nowork</code>.</p>
+<p>日志细节中，时间为很重要的信息，根据操作、事件发生时的时间填写，而非结束时间。
+    如果要删除已经填写的某一行，在小时上选中&cross;，就表示本行无效。</p>
 
-<h5>Log items</h5>
-<p>For log items, time is important column, please choose the start time of event or operation.
-    If you want to delete a line, select &cross; at hour drop-down box.
-    File number column can be empty, if the operation is not observation.</p>
+<p>文件起止编号，仅对具体产生观测文件的操作有效。其他记录信息，
+    例如天气变化、设备问题等等，没有相应的文件，则文件编号为空。</p>
 
-<p>These event should be logged, normal observation, shifting to a new list, bias and flat,
-    focusing and focus parameters, pause and resume of observation and reason for it,
-    bad weather or device problem, inserted works, dewar filling,
-    and any other event need to let readers known.</p>
+<p>需要在日志中记录的内容包括但是不限于:</p>
 
-<p>Bad image should also be recorded, in item note or night note.</p>
+<ul>
+    <li>观测操作，如本底、平场、目标观测等。原则上每个观测列表记录一个条目。
+        如果一个列表由于各种原因拆成多个分别观测，那么分别记录。</li>
+    <li>调焦等操作需要单独记录，并且记录下焦距的相关数值，以便将来参考。</li>
+    <li>天气变化、设备问题、以及其他临时中断操作的情形，必须记录。</li>
+    <li>对于Bok望远镜，开关圆顶、加液氮等操作也要记录，并且还要记录开关圆顶时的气象信息作为备注。</li>
+    <li>观测中发现的坏图像，如果属于偶然问题，随机出现时，需要在日志中所在观测的行记录坏图像编号，
+        或者在总备注中记录，并且尽可能及时重拍。不需要单独列出一个日志行。如果是设备故障，另行处理。</li>
+    <li>其他需要随时间线列举的事件。</li>
+</ul>
 
-<h5>Other parts</h5>
-<p>Plan is the original plan of this night, if no special purpose, just write normal.</p>
+<h4>日志其他部分</h4>
 
-<p>Result is corresponding to plan.</p>
+<p>计划，指在观测开始之前的安排，主要说明在常规观测之外的计划。
+    例如进行某项指标的测试，或者有特殊目标需要关注等等。</p>
 
-<p>Note is used for special cases in this night need to record. Or anything else to cells above.</p>
+<p>结果，指对照观测计划，具体的执行总体概述。是否完成，如果没有全部完成那么完成量多少等等。</p>
 
-<h5>Save and Submit</h5>
-<p>In writing log, you can click <code>save</code> button to save at anytime.
-    After saving, system will provide 10 extra empty log items.
-    Saving log will not end work and will not submit.</p>
+<p>备注，当晚在以上格式化项目中无法覆盖但是又必须说明的问题。</p>
 
-<p>After observation, click <code>submit</code> button to preview the whole log.
-    If all status is unchecked or operator names is missing, you cannot submit.
-    At preview interface, you can go back to editing form.</p>
+<h4>保存和提交</h4>
 
-<p>Log form before submitting cannot be read by others, only operators can edit it.</p>
+<p>在撰写过程中，随时可以点击右下角保存按钮进行暂存。
+    暂存的日志属于未完成的工作，其他人无法阅读。建议经常进行保存，避免出现数据丢失。</p>
 
-<p>If you want to change submitted log, it is allowed, before the manager accept the log.
-    But your last submit time will be recorded and shown on log.</p>
+<p>每次保存都会增加若干空日志行供填写，如果提供的空行用满，也可以通过保存获取新行。
+    新空行如果没有填写内容(主要是小时字段是&cross;，那么不会被保存，不用担心最终日志出现空行。</p>
+
+<p>日志全部填写完成后，可以点击提交按钮进行预览，检查无误就可以提交。
+    提交后的版本属于公开发布的试行版本，任何登录上的操作员都能查看。</p>
+
+<p>提交后的试行版本，操作员仍然可以修改内容，多次提交。以最后一次提交为准，并且会记录最终提交时间。
+    提交后的版本，管理员可以进行确认接受。接受之后，就成为正式版本，各方可以打印存档。</p>
+
+<p>如果管理员对日志内容有疑问或觉得需要修改、说明的地方，可以联系操作员进行修改和重新提交。
+    管理员在确认最终版本时需要慎重，因为一旦确认，不论操作员还是管理员都不能修改。</p>
 
 <?php require 'foot.php'; ?>
 <?php require 'conx.php'; ?>

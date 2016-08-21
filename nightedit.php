@@ -37,6 +37,10 @@ $status = $rownight["Status"];
 $submittime = $rownight["SubmitTime"];
 $accepttime = $rownight["AcceptTime"];
 
+if (is_null($operator) || $operator == "") {
+    $operator = "$aName / $aInfo";
+}
+
 if (! is_null($accepttime)) {
     // accepted log cannot be edited again
     header("location: nightlog.php?id=$nid");

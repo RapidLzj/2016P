@@ -112,7 +112,7 @@ if ($status == 0) {
         echo ($c ? "&check;" : "&cross;") .
             "<span class='" . ($c ? "checked" : "uncheck") . "'>$StatusText[$s]</span> &nbsp; ";
     }
-    if ($status == 1) {
+    if ($status == StatusDoing) {
         echo "<br /><span class='error'>Please choose proper status.</span>";
     }
     echo "</td>" .
@@ -120,9 +120,9 @@ if ($status == 0) {
     echo "<tr>" .
         "<td class='field'>Weather General</td>" .
         "<td class='value'>" .
-        "Lightning: $Weather_Lightning[$weatherl]\n" .
-        "&nbsp;Wind: $Weather_Wind[$weatherw]\n" .
-        "&nbsp;Humidity: $Weather_Humidity[$weatherh]\n" .
+        "<b>Lightning:</b> $Weather_Lightning[$weatherl]\n" .
+        "&nbsp;<b>Wind:</b> $Weather_Wind[$weatherw]\n" .
+        "&nbsp;<b>Humidity:</b> $Weather_Humidity[$weatherh]\n" .
         "</td>" .
         "</tr>\n";
     echo "<tr>" .

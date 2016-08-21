@@ -5,7 +5,6 @@ define("LevelRun",   1 << 14);
 define("LevelSys",   1 << 15);
 //Night Status
 define("StatusDoing",   1 <<  0);
-define("StatusFinal",   1 <<  1);
 define("StatusObsed",   1 <<  2);
 define("StatusNone",    1 <<  3);
 define("StatusShared",  1 <<  4);
@@ -16,7 +15,7 @@ define("StatusElse",    1 << 10);
 define("StatusPlan",    1 << 15);
 $StatusArr = array(StatusObsed, StatusNone, StatusShared,
     StatusWeather, StatusDevice, StatusOther, StatusElse, StatusPlan);
-$StatusText = array("Obsed", "NoWork", "Shared",
+$StatusText = array("AllOK", "NoWork", "Shared",
     "Weather", "Device", "Other", "Else", "Plan");
 $StatusTitle = array(
     "Finished and the whole night is used.",

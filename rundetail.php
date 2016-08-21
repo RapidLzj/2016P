@@ -11,8 +11,9 @@ if (! isset($runid)) {
 }
 $pagetitle = 'Run $runid Info';
 
-$sqlrun = "SELECT RunID, Telescope, FromDate, ToDate, Filters, Note, ToJD-FromJD+1 AS Nights " .
-          "FROM ObsRun r WHERE RunID = '$runid'";
+$sqlrun = "SELECT RunID, Telescope, FromDate, ToDate, FromJD, ToJD, Filters, " .
+    "Note, ToJD-FromJD+1 AS Nights " .
+    "FROM ObsRun r WHERE RunID = '$runid'";
 $rsrun = $conn->query($sqlrun);
 if ($rsrun->num_rows == 0) {
     header("location: ./");
@@ -22,6 +23,8 @@ $rowrun = $rsrun->fetch_array();
 $teles = $rowrun["Telescope"];
 $fdate = $rowrun["FromDate"];
 $tdate = $rowrun["ToDate"];
+$fjd = $rowrun["FromJD"];
+$tjd = $rowrun["ToJD"];
 $filts = $rowrun["Filters"];
 $rnote  = $rowrun["Note"];
 $nights = $rowrun["Nights"];
@@ -45,8 +48,8 @@ echo "<p class='title'>Run $runid" .
     "</p>\n";
 
 echo "<table id='tbrund'>\n" .
-    "<tr><td>Date: $fdate &rArr; $tdate | ".
-    "Filters:  $filts | " .
+    "<tr><td>Date: $fdate(J$fjd) &rArr; $tdate(J$tjd)</td></tr>\n" .
+    "<tr><td>Filters:  $filts | " .
     "<span class='note'>Telescope: $telen</span></td>" .
     "<tr><td>Note: <span class='note'>$rnote</span></td></tr>\n" .
     "</table>\n";
