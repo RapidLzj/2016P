@@ -38,8 +38,8 @@ if ($err == 0) {
         $teles = $rowrun["Telescope"];
         $fdate = $rowrun["FromDate"];
         $tdate = $rowrun["ToDate"];
-        $filts = str_replace("'", "''", $rowrun["Filters"]);
-        $rnote = str_replace("'", "''", $rowrun["Note"]);
+        $filts = str_replace("'", "&#39;", $rowrun["Filters"]);
+        $rnote = str_replace("'", "&#39;", $rowrun["Note"]);
     } else {
         $oldid = "";
         $teles = "";
@@ -55,8 +55,8 @@ if ($err == 0) {
     $teles = $_COOKIE["Telescope"];
     $fdate = $_COOKIE["FromDate"];
     $tdate = $_COOKIE["ToDate"];
-    $filts = str_replace("'", "''", $_COOKIE["Filters"]);
-    $rnote = str_replace("'", "''", $_COOKIE["Note"]);
+    $filts = str_replace("'", "&#39;", $_COOKIE["Filters"]);
+    $rnote = str_replace("'", "&#39;", $_COOKIE["Note"]);
 }
 
 $pagetitle = "Edit Run $oldid";

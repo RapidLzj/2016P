@@ -105,6 +105,10 @@ if ($status == 0) {
         "</tr>\n";
 } else {
     echo "<tr>" .
+        "<td class='field'>Operator</td>" .
+        "<td class='value'>$operator</td>" .
+        "</tr>\n";
+    echo "<tr>" .
         "<td class='field'>Status</td>" .
         "<td class='value'>";
     for ($s = 0; $s < $nStatus; $s++) {

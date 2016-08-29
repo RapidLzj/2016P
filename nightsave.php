@@ -13,9 +13,9 @@ $weatherd = str_replace("'", "''", $_POST["weatherd"]);
 $status = StatusDoing;
 for ($s = 0; $s < $nStatus; $s++)
     $status += (isset($_POST["s$StatusText[$s]"]) ? $StatusArr[$s] : 0);
-$plan = $_POST["plan"];
-$result = $_POST["result"];
-$note = $_POST["note"];
+$plan = str_replace("'", "''", $_POST["plan"]);
+$result = str_replace("'", "''", $_POST["result"]);
+$note = str_replace("'", "''", $_POST["note"]);
 
 $lid = $_POST["lid"];
 $lhour = $_POST["lhour"];
