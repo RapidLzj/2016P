@@ -11,7 +11,7 @@ if (! $levelEditSys) {
 }
 
 $sqluser = "SELECT PID, PLogin, PLevel, PName, PInfo " .
-          "FROM Person p ORDER BY PLogin";
+          "FROM Person p WHERE PLevel < 65535 ORDER BY PLogin";
 $rsuser = $conn->query($sqluser);
 
 $sqltel = "SELECT Telescope, LevelMask FROM Telescope";
@@ -19,7 +19,7 @@ $rstel = $conn->query($sqltel);
 $tt = $rstel->num_rows + 3;
 $tel = array();
 while ($row =$rstel->fetch_array()) {
-    $tel[$row["Telescope"]] = $row["LevelMask"];
+    $tel[$row["Telescope"]] = intval($row["LevelMask"]);
 }
 
 
@@ -29,6 +29,7 @@ echo "<p class='title'>System Users</p>";
 
 $usercnt = $rsuser->num_rows;
 $rowid = 0;
+
 if ($usercnt == 0) {
     echo "<p class='note'>No other user in system now.</p>";
 } else {
@@ -56,9 +57,9 @@ if ($usercnt == 0) {
         $plevel = $row["PLevel"];
         $pname  = $row["PName"];
         $pinfo  = $row["PInfo"];
-        $plevellogin = ($plevel & LevelLogin) != 0 ? "&check;" : "&cross;";
-        $plevelrun = ($plevel & LevelRun) != 0 ? "&check;" : "&cross;";
-        $pleveluser = ($plevel & LevelSys) != 0 ? "&check;" : "&cross;";
+        $plevellogin = ($plevel & LevelLogin) != 0 ? "&check;" : "<span class='note'>&cross;</span>";
+        $plevelrun = ($plevel & LevelRun) != 0 ? "&check;" : "<span class='note'>&cross;</span>";
+        $pleveluser = ($plevel & LevelSys) != 0 ? "&check;" : "<span class='note'>&cross;</span>";
         echo "<tr class='rowalt$rowalt'>\n" .
             "<td class='sn'>$rowid</td>\n" .
             "<td class='login'>$plogin</td>\n" .
@@ -68,7 +69,7 @@ if ($usercnt == 0) {
             "<td class='level'>$plevelrun</td>\n" .
             "<td class='level'>$pleveluser</td>\n";
         foreach ($tel as $tn => $tm)
-            echo "<td class='level'>" . (($plevel & $tm) != 0 ? "&check;" : "&cross;") . "</td>\n";
+            echo "<td class='level'>" . (($plevel & $tm) != 0 ? "&check;" : "<span class='note'>&cross;</span>") . "</td>\n";
         echo "<td title='Edit run'><a href='useredit.php?id=$pid'>&#x1f4dd;</a></td>\n";
         echo "</tr>\n";
     }

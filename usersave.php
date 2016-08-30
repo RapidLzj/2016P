@@ -85,7 +85,7 @@ if ($err != 0) {
         } else {
             $sqlnew = "UPDATE Person SET " .
                 ($pid != $aPid ? "PLogin = '$plogin', PLevel = $plevel, " :"") .
-                ($ppswd1 == "" ? "PPswd = '$ppswd1', " : "").
+                ($ppswd1 != "" ? "PPswd = '$ppswd1', " : "").
                 "PName = '$pname', " .
                 "PInfo = '$pinfo'  " .
                 "WHERE PID = $pid";

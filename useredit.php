@@ -62,7 +62,7 @@ $sqltel = "SELECT Telescope, LevelMask FROM Telescope";
 $rstel = $conn->query($sqltel);
 $tel = array();
 while ($row =$rstel->fetch_array()) {
-    $tel[$row["Telescope"]] = ($plevel & $row["LevelMask"]) != 0;
+    $tel[$row["Telescope"]] = ($plevel & intval($row["LevelMask"])) != 0;
 }
 
 function chkbox($chkname, $cls, $text, $value, $title) {
@@ -107,7 +107,7 @@ echo "<tr>" .
 echo "<tr>" .
     "<th class='field'>New Password</th>" .
     "<td class='value' title=''>" .
-    "<input type='password' class='shorttext' name='ppswd1' value='' maxlength='255' />" .
+    "<input type='password' class='shorttext' name='ppswd1' value='' maxlength='255' /> <b>Again</b> " .
     "<input type='password' class='shorttext' name='ppswd2' value='' maxlength='255' />" .
     "</td></tr>\n";
 echo "<tr>" .

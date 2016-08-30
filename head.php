@@ -13,7 +13,7 @@
 </div>
 <?php if (isset($aLevel)) : ?>
 <div id='menu'>
-    <span><?="$aName/$aInfo"?></span>&emsp;
+    <span><?="$aName / $aInfo"?></span>&emsp;
     <a href='./'>&#x1f310; Home</a> |
     <?php if ($levelEditRun) : ?><a href='runedit.php'>&#x1f4c5; New Run</a> | <?php endif; ?>
     <a href='useredit.php?id=self'>&#x1f5dd; My Profile</a> |

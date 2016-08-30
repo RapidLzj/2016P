@@ -306,6 +306,7 @@ table.tblist {
 }
 #tbuser .level {
     width: 50px;
+	text-align: center;
 }
 #tbuser .name {
     width: 150px;
