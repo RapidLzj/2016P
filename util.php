@@ -73,4 +73,28 @@ function monthspan( $month ) {
     return array($d0, $d1);
 }
 
+function deg2hms($d) {
+    $h = $d / 15.0;
+    $hh = intval($h);
+    $mm = intval(($h - $hh) * 60.0);
+    $ss = ($h - $hh - $mm / 60.0) * 3600.0;
+    return sprintf("%02d:%02d:%05.2f", $hh, $mm, $ss);
+}
+
+function deg2dms($d) {
+    $si = $d < 0.0 ? "-" : "+";
+    $ad = abs($d);
+    $dd = intval($ad);
+    $mm = intval(($ad - $dd) * 60.0);
+    $ss = ($ad - $dd - $mm / 60.0) * 3600.0;
+    return sprintf("%1s%02d:%02d:%04.1f", $si, $dd, $mm, $ss);
+}
+
+function sec2hms($s) {
+    $hh = intval($s / 3600.0);
+    $mm = intval($s % 60 / 60.0);
+    $ss = intval($s % 60);
+    return sprintf("%02d:%02d:%02d", $hh, $mm, $ss);
+}
+
 ?>

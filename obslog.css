@@ -207,16 +207,16 @@ table.tblist {
 	width: 350px;
 }
 #tbnight .date {
-	width: 120px;
+	width: 100px;
 	text-align: center;
 }
 #tbnight .status {
-	width: 60px;
+	width: 40px;
 	text-align: center;
 }
 #tbnight .num {
 	width: 40px;
-	text-align: center;
+	text-align: right;
 }
 #tbnight .write {
 	width: 50px;

@@ -211,6 +211,12 @@ if ($preview) {
         "</td>" .
         "</tr>";
 }
+echo "<tr>" .
+    "<td class='field'></td>" .
+    "<td class='value'>" .
+    "<a href='nightfile.php?id=$nid'>Files on this night</a>" .
+    "</td>" .
+    "</tr>";
 echo "</table>\n";
 echo "<p></p>\n";
 

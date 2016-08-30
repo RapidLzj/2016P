@@ -9,7 +9,7 @@ if (! isset($runid)) {
     header("location: ./");
     require "conx.php";
 }
-$pagetitle = 'Run $runid Info';
+$pagetitle = "Run $runid Info";
 
 $sqlrun = "SELECT RunID, Telescope, FromDate, ToDate, FromJD, ToJD, Filters, " .
     "Note, ToJD-FromJD+1 AS Nights " .
@@ -36,8 +36,12 @@ $levelTeles = ($aLevel & $rowtel["LevelMask"]) != 0;
 $telen = $rowtel["FullName"];
 
 $sqlnight = "SELECT NightID, MJD, DateStr, Status, " .
-            "(SELECT COUNT(*) FROM ObsLog WHERE NightID = n.NightID) AS LogCnt ".
-            "FROM ObsNight n WHERE RunID = '$runid'";
+    "(SELECT COUNT(*) FROM FileBasic WHERE SUBSTR(FileID, 1, 5) = n.NightID AND TYPE='B') AS BiasCnt, " .
+    "(SELECT COUNT(*) FROM FileBasic WHERE SUBSTR(FileID, 1, 5) = n.NightID AND TYPE='F') AS FlatCnt, " .
+    "(SELECT COUNT(*) FROM FileBasic WHERE SUBSTR(FileID, 1, 5) = n.NightID AND TYPE='S') AS SurveyCnt, " .
+    "(SELECT COUNT(*) FROM FileBasic WHERE SUBSTR(FileID, 1, 5) = n.NightID AND TYPE='O') AS OtherCnt, " .
+    "(SELECT COUNT(*) FROM ObsLog WHERE NightID = n.NightID) AS LogCnt ".
+    "FROM ObsNight n WHERE RunID = '$runid'";
 $rsnight = $conn->query($sqlnight);
 
 
@@ -56,14 +60,18 @@ echo "<table id='tbrund'>\n" .
 echo "<p></p>";
 
 $rowid = 0;
-echo "<table id='tbnight' class='tblist'>\n" .
-    "<tr>\n" .
+echo "<table id='tbnight' class='tblist'>\n";
+echo "<tr>\n" .
     "<th title='Line No'>&numero;</th>\n" .
     "<th title='Local Date and Julian Day'>Date</th>\n";
 for ($i = 0; $i < $nStatus; $i++) {
     echo "<th title='$StatusTitle[$i]'>$StatusText[$i]</th>";
 }
-echo "<th title='Log Items Count'>Log</th>\n";
+//echo "<th title='Log Items Count'>Log</th>\n";
+echo "<th title='Bias File Count'>BIAS</th>\n";
+echo "<th title='Flat File Count'>FLAT</th>\n";
+echo "<th title='Survey File Count'>SURVEY</th>\n";
+echo "<th title='Other File Count'>OTHER</th>\n";
 if ($levelTeles) {
     echo "<th title='Write log'>Edit</th>\n";
 }
@@ -76,6 +84,10 @@ while ($row = $rsnight->fetch_array()) {
     $mjd = $row["MJD"];
     $status = $row["Status"];
     $logcnt = $row["LogCnt"];
+    $bcnt = $row["BiasCnt"];
+    $fcnt = $row["FlatCnt"];
+    $scnt = $row["SurveyCnt"];
+    $ocnt = $row["OtherCnt"];
     echo "<tr class='rowalt$rowalt'>\n" .
         "<td class='sn'>$rowid</td>\n" .
         "<td class='date'><a href='nightlog.php?id=$nid' title='View log'>$dates/J$mjd</a></td>\n";
@@ -90,12 +102,27 @@ while ($row = $rsnight->fetch_array()) {
             $ss = "-";
         echo "<td class='status' title='$StatusTitle[$i]'>$ss</td>\n";
     }
-    echo "<td class='num'>$logcnt</td>\n";
+    echo "<td class='num'><a href='nightfile.php?id=$nid' title='View files'>$bcnt</a></td>\n";
+    echo "<td class='num'><a href='nightfile.php?id=$nid' title='View files'>$fcnt</a></td>\n";
+    echo "<td class='num'><a href='nightfile.php?id=$nid' title='View files'>$scnt</a></td>\n";
+    echo "<td class='num'><a href='nightfile.php?id=$nid' title='View files'>$ocnt</a></td>\n";
     if ($levelTeles) {
         echo "<td class='write'><a href='nightedit.php?id=$nid' title='Write log'>&#x1f4dd;</a></td>";
     }
     echo "</tr>\n";
 }
+echo "<tr>\n" .
+    "<td title='Line No'>&numero;</td>\n" .
+    "<td style='text-align:center;'>&#x2b06;View Log&#x2b06;</td>\n";
+echo "<td colspan='$nStatus'>$StatusText[$i]</td>";
+
+//echo "<th title='Log Items Count'>Log</th>\n";
+echo "<td style='text-align:center;' colspan='4'>&#x2b06;View Files&#x2b06;</td>\n";
+if ($levelTeles) {
+    echo "<td title='Write log'>Edit</td>\n";
+}
+echo "</tr>\n";
+
 
 echo "</table>\n<p></p>\n";
 
