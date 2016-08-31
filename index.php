@@ -49,7 +49,8 @@ if ($runcnt == 0) {
         "<th title='Start and End Date'>&#x1f4c5;</th>\n" .
         "<th title='Night Count'>&#x2728;</th>\n" .
         "<th title='Status'>&#x1f5c2;</th>\n" .
-        "<th title='Note'>&#x1f4dc;</th>\n" .
+        //"<th title='Note'>&#x1f4dc;</th>\n" .
+        "<th title='Filters'>&#x1f4dc;</th>\n" .
         ($levelEditRun ? "<th title='Edit'>&#x1f4dd;</th>\n" : "") .
         "</tr>\n";
     while ($row = $rsrun->fetch_array()) {
@@ -83,7 +84,8 @@ if ($runcnt == 0) {
             "</td>\n" .
             "<td class='num'>$nights</td>\n" .
             "<td class='status'>$statuss[$status]</td>\n" .
-            "<td class='note'>$note</td>\n" .
+            //"<td class='note'>$note</td>\n" .
+            "<td class='note'>$filts</td>\n" .
             ($levelEditRun ? "<td title='Edit run'><a href='runedit.php?id=$runid'>&#x1f4dd;</a></td>\n" : "") .
             "</tr>\n";
     }
