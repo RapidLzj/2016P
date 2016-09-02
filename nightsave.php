@@ -45,8 +45,8 @@ for ($i = 0; $i < count($lid); $i++) {
     $ltime = $lhour[$i] * 3600 + $lmin[$i] * 60;
     $event2 = str_replace("'", "''", $event[$i]);
     $lnote2 = str_replace("'", "''", $lnote[$i]);
-    $fsn2 = is_int($fsn[$i]) ? $fsn[$i] : "NULL";
-    $tsn2 = is_int($tsn[$i]) ? $tsn[$i] : "NULL";
+    $fsn2 = is_numeric($fsn[$i]) ? $fsn[$i] : "NULL";
+    $tsn2 = is_numeric($tsn[$i]) ? $tsn[$i] : "NULL";
 
     if ($lid[$i] > 0 && $lhour[$i] > 0) {
         $sqllog = "UPDATE ObsLog SET " .
