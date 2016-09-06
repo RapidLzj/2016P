@@ -7,8 +7,8 @@ require 'util.php';
 
 // order: 0, default, by date desc, 1, by telescope, 2 by status (ing-ed-to)
 $order = $_GET["order"];
-if (! isset($order) || ! is_numeric($order)) $order = 0;
-if ($order != 1 && $order != 2) $order = 0;
+if (! isset($order) || ! is_numeric($order)) $order = 2;
+if ($order != 1 && $order != 0) $order = 2;
 
 $sqlrun = "SELECT RunID, Telescope, FromDate, ToDate, Filters, Note, ToJD-FromJD+1 AS Nights, ".
           "(SELECT count(*) FROM ObsNight WHERE RunID = r.RunID AND (Status = 0  OR Status % 2 = 1)) AS Night0, " .
